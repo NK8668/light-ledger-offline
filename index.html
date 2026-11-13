@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="zh-CN">
-<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#244e43"><title>轻松记账 · 说一句，记一笔</title><link rel="stylesheet" href="style.css"><link rel="manifest" href="manifest.webmanifest"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="轻松记账"><script src="offline.js?v=4" defer></script></head>
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#244e43"><title>轻松记账 · 说一句，记一笔</title><link rel="stylesheet" href="style.css"><link rel="manifest" href="manifest.webmanifest"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="轻松记账"><script src="offline.js?v=5" defer></script></head>
 <body>
 <header class="top"><a class="brand" href="/" aria-label="轻松记账首页"><span class="brand-mark" aria-hidden="true">记</span><span>轻松记账<small>说一句，记一笔</small></span></a><button id="more-button" class="plain-button" aria-haspopup="dialog">更多功能</button></header>
 <main><p style="padding:12px;border-radius:12px;background:#f4e7c9;font-size:18px;color:#244e43">离线试用版 · 账目保存在这台手机上。</p>
@@ -15,8 +15,9 @@
   <div class="book-heading"><div><span class="overline">钱花在哪里，一眼看清</span><h2 id="month-title"></h2></div><div class="month-controls"><button id="all-months" class="plain-button" aria-pressed="true">只看本月</button><button id="previous-month" class="plain-button" aria-label="查看上个月">← 上个月</button><button id="next-month" class="plain-button" aria-label="查看下个月">下个月 →</button></div></div>
   <div id="summary" class="summary" aria-live="polite"></div>
   <div id="book-filters" class="book-filters" aria-label="筛选用途"><button class="filter active" data-filter="all" aria-pressed="true">全部账单</button><button class="filter" data-filter="personal" aria-pressed="false">只看家用</button><button class="filter" data-filter="business" aria-pressed="false">只看生意</button><button class="filter" data-filter="pending" aria-pressed="false">待分清</button></div>
-  <div class="list-heading"><h3 id="list-title">最近记的账</h3><span id="list-count"></span></div>
+  <div class="list-heading"><h3 id="list-title">最近记的账</h3><span id="list-count"></span><button id="toggle-bulk" class="filter" hidden>批量分账</button></div>
   <nav class="ledger-pagination" aria-label="账单列表翻页" hidden><button data-ledger-page="previous" aria-controls="entry-list">上一页</button><span class="ledger-page-status" aria-live="polite"></span><button data-ledger-page="next" aria-controls="entry-list">下一页</button></nav>
+  <div id="bulk-tools" class="bulk-tools" hidden><div><strong id="bulk-count">已选0笔</strong><button id="select-pending" class="filter">全选待分清</button><button id="clear-selection" class="filter">取消选择</button></div><button id="bulk-personal" class="filter">选中改为家用</button><button id="bulk-business" class="filter">选中改为生意</button></div>
   <div id="entry-list"></div>
   <nav class="ledger-pagination" aria-label="账单列表底部翻页" hidden><button data-ledger-page="previous" aria-controls="entry-list">上一页</button><span class="ledger-page-status"></span><button data-ledger-page="next" aria-controls="entry-list">下一页</button></nav>
  </section>
