@@ -8,3 +8,5 @@
 .ledger-pagination{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);align-items:center;gap:12px;margin:16px 0}.ledger-pagination button{min-height:50px;padding:10px 12px;border-radius:12px;background:var(--green);color:white;font-size:19px}.ledger-pagination button:disabled{background:#e7ebe0;color:var(--muted);opacity:1;cursor:default}.ledger-page-status{white-space:nowrap;font-size:16px;font-variant-numeric:tabular-nums}.ledger-pagination button:disabled:active{transform:none}#list-title{scroll-margin-top:16px}
 
 #all-months{border:2px solid #245c49;border-radius:14px;padding:10px 16px;font-weight:700;min-height:48px}.month-controls{flex-wrap:wrap}
+
+.bulk-tools{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:12px 0}.bulk-tools>div{display:flex;flex-wrap:wrap;align-items:center;gap:8px;width:100%}.bulk-tools strong{margin-right:auto}.entry-choice-row{display:grid;grid-template-columns:38px minmax(0,1fr);align-items:center;gap:8px;border-bottom:1px solid var(--line)}.entry-choice-row input{width:25px;height:25px;accent-color:var(--green);justify-self:center}.entry-choice-row .entry{border-bottom:0;width:100%}
