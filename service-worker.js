@@ -1,4 +1,4 @@
-const CACHE='light-ledger-offline-v8';
+const CACHE='light-ledger-offline-v9';
 const PREFIX='light-ledger-offline-';
 const FILES=['./','./index.html','./style.css','./offline.js','./manifest.webmanifest','./icon.svg'];
 self.addEventListener('install',event=>event.waitUntil(caches.open(CACHE).then(cache=>cache.addAll(FILES)).then(()=>self.skipWaiting())));
