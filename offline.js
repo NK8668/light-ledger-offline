@@ -49,6 +49,7 @@ function renderDraft(){
  $('amount').textContent=draft.amount||'0';$('amount-caption').textContent=draft.kind==='expense'?'花了多少钱':draft.kind==='income'?'收了多少钱':'转了多少钱';
  $('kind-buttons').querySelectorAll('button').forEach(b=>{b.classList.toggle('selected',b.dataset.kind===draft.kind);b.setAttribute('aria-pressed',String(b.dataset.kind===draft.kind));});
  $('scope-buttons').querySelectorAll('button').forEach(b=>{b.classList.toggle('selected',b.dataset.scope===draft.scope);b.setAttribute('aria-pressed',String(b.dataset.scope===draft.scope));});
+ const purpose=$('business-purpose');purpose.hidden=draft.scope!=='business';const note=$('entry-note');if(note&&note.value!==draft.note)note.value=draft.note;document.querySelectorAll('[data-purpose]').forEach(b=>b.classList.toggle('selected',b.dataset.purpose===draft.note));
  $('entry-day-label').textContent=draft.day;
  document.querySelectorAll('[data-day]').forEach(b=>{b.classList.toggle('selected',(b.dataset.day==='today'?today:previousDay())===draft.day);});
  const value=Number(draft.amount);$('confirm-line').textContent=value>0?`${labels[draft.scope]} · ${kindLabels[draft.kind]} ${draft.amount} 元`:'点数字填金额，或者说一句话';
@@ -59,6 +60,7 @@ document.querySelectorAll('[data-close]').forEach(b=>b.addEventListener('click',
 document.querySelectorAll('[data-start]').forEach(b=>b.addEventListener('click',()=>openEntry(b.dataset.start==='income'?{kind:'income',scope:'pending'}:{scope:b.dataset.start})));
 $('kind-buttons').addEventListener('click',e=>{const b=e.target.closest('[data-kind]');if(!b)return;draft.kind=b.dataset.kind;renderDraft();});
 $('scope-buttons').addEventListener('click',e=>{const b=e.target.closest('[data-scope]');if(!b)return;draft.scope=b.dataset.scope;renderDraft();});
+$('entry-note').addEventListener('input',e=>{draft.note=e.target.value;document.querySelectorAll('[data-purpose]').forEach(b=>b.classList.toggle('selected',b.dataset.purpose===draft.note));});document.querySelectorAll('[data-purpose]').forEach(b=>b.addEventListener('click',()=>{draft.note=b.dataset.purpose;$('entry-note').value=draft.note;document.querySelectorAll('[data-purpose]').forEach(p=>p.classList.toggle('selected',p===b));}));
 document.querySelectorAll('[data-day]').forEach(b=>b.addEventListener('click',()=>{draft.day=b.dataset.day==='today'?today:previousDay();renderDraft();}));
 $('save-entry').addEventListener('click',async()=>{const b=$('save-entry');if(!draft.amount||Number(draft.amount)<=0){errorAt('entry-error',Error('还没有金额，请点数字填上。'));return;}b.disabled=true;try{await api('/api/entries',draft);const editing=!!draft.id;if(month!=='all')month=draft.day.slice(0,7);ledgerPage=0;close('entry-dialog');await loadEntries();message(editing?'改好了':'记好了：'+labels[draft.scope]+' '+draft.amount+' 元');safeSay('记好了');}catch(e){errorAt('entry-error',e);}finally{b.disabled=false;}});
 $('delete-entry').addEventListener('click',async()=>{if(!confirm('确定删掉这笔账吗？删后可以立即撤回。'))return;try{const id=draft.id;await api('/api/delete',{id});close('entry-dialog');await loadEntries();message('这笔已经删除',id);}catch(e){errorAt('entry-error',e);}});
